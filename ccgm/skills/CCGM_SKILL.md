@@ -93,6 +93,20 @@ User wants to understand, not just have a solution. For tutorials, when learning
 
 **Say to user when entering:** "🎓 Learning mode active. I'll walk through reasoning, show one piece at a time, and check in as we go."
 
+### 🤖 Auto
+
+Not a goal — an operating mode. When active, CCGM detects implicit signals and switches the active goal automatically, without asking for confirmation. The switch is announced in one line; the user can override at any time with any `/goal` command.
+
+**Activate with:** `/goal auto`
+
+**Say to user when entering:** "🤖 Auto mode active. I'll detect goal signals and switch without asking — one-line notice, override any time with /goal <mode>."
+
+**Constraints:**
+- Only switches on clear, unambiguous signals. Vague tone does not trigger a switch.
+- Never auto-downgrades from a safer goal without an explicit signal (e.g., Quality → Speed requires a clear "ship it" signal).
+- Security baseline always applies regardless of auto mode. See Security Baseline.
+- Can be combined with any goal: `/goal auto` activates the operating mode; the current goal stays until a signal triggers a switch.
+
 ---
 
 ## How to Detect the Active Goal
@@ -103,7 +117,8 @@ The goal can be set three ways:
 
 User types one of:
 - `/goal cost`, `/goal quality`, `/goal speed`, `/goal learning`, `/goal balanced`
-- `/goal off` → revert to Balanced
+- `/goal auto` → activate auto mode (switches without confirmation on signal detection)
+- `/goal off` → revert to Balanced and exit auto mode
 - "switch to cost mode", "let's do this in speed mode", etc.
 
 When you see this, confirm in one line and continue. Don't restate the rules at length.
@@ -129,6 +144,19 @@ Wait for the user's answer before adapting heavily.
 
 If no signal and no explicit set, **stay in ⚖️ Balanced**. Don't ask the user to pick a mode every conversation — Balanced is the right answer when nothing else is.
 
+### 4. Auto mode (signal-based, no confirmation)
+
+When `/goal auto` is active, implicit signals trigger an immediate switch instead of a confirmation prompt. Announce the switch in one line and proceed:
+
+> `⚡ Speed mode erkannt ("hack it together") — aktiviert. /goal balanced zum Zurückschalten.`
+
+The announcement format:
+```
+🤖 [Goal emoji] [Goal name] erkannt ("[signal phrase]") — aktiviert. /goal [previous] zum Zurückschalten.
+```
+
+Only switch on **clear signals** from the signal table above. If the signal is ambiguous, stay on the current goal — auto mode does not lower the bar for what counts as a signal, it only removes the confirmation step.
+
 ---
 
 ## When to Suggest a Goal Switch (Active Reconsideration)
@@ -149,7 +177,9 @@ Switch suggestion format (keep it light, one line):
 
 > "Quick check: this turned into a deeper investigation than a quick fix — want to bump to 🛡️ Quality for this part?"
 
-Don't be naggy. If the user ignored a suggestion once, don't repeat it in the same session.
+**In auto mode:** skip the question — execute the switch immediately with the one-line announcement format (see section 4 above). Active reconsideration still fires; it just doesn't wait for a reply.
+
+Don't be naggy. If the user ignored a suggestion once (or overrode an auto-switch), don't repeat it in the same session.
 
 ---
 
@@ -224,7 +254,8 @@ This is the single source of truth for the security rule. CCPM references this s
 /goal quality     → 🛡️  Best possible. Opus-heavy, more thinking.
 /goal speed       → ⚡  Ship fast. Polish deferred.
 /goal learning    → 🎓  Teach mode. Walk through reasoning.
-/goal off         → revert to Balanced
+/goal auto        → 🤖  Auto mode. Signals switch goal without confirmation.
+/goal off         → revert to Balanced (also exits auto mode)
 ```
 
-When suggesting a switch, use the one-liner format and let the user decide.
+In standard mode, use the one-liner suggestion format and let the user decide. In auto mode, announce and execute.
