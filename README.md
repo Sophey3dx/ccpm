@@ -3,13 +3,25 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Made for Claude Code](https://img.shields.io/badge/Made%20for-Claude%20Code-D97757)
 ![Skills: 2](https://img.shields.io/badge/Skills-2-blue)
-![Version](https://img.shields.io/badge/Version-1.0.0-green)
+![Version](https://img.shields.io/badge/Version-2.0.0-green)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 ![Stars](https://img.shields.io/github/stars/Sophey3dx/ccpm?style=social)
 ![Last Commit](https://img.shields.io/github/last-commit/Sophey3dx/ccpm)
 ![Issues](https://img.shields.io/github/issues/Sophey3dx/ccpm)
 
 > Two skills for Claude Code that make every task smarter about which model to use, how much to think, and what to optimize for — out of the box.
+
+## TL;DR — In 30 Seconds
+
+1. Copy `skills/ccpm` and `skills/ccgm` to `~/.claude/skills/`
+2. Start a new Claude Code session
+3. Say: *"Plan how to add dark mode to my app"*
+   → You'll see `🤖 … | ⚡ …` tags under each step, routing each one to the right model
+4. Optional: Say `/goal auto` to enable automatic goal detection
+
+That's it. The rest of this README explains why and how.
+
+---
 
 This repo ships two skills designed to work together:
 
