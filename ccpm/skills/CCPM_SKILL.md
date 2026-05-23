@@ -336,7 +336,7 @@ Find issues, don't patch in this pass.
 - **The first step of a feature is rarely Opus.** Discovery and setup aren't the hard part. Save Opus for the actual hard decisions.
 - **If every step is Opus xHigh, you're not planning — you're panicking.** Re-evaluate the plan.
 - **"Important" ≠ "needs Opus".** A critical security fix might still be a one-line change once you know what to do. The thinking part needs Opus, not the patch.
-- **Security work overrides Cost/Speed goals.** If a step touches auth, secrets, or anything user-data-sensitive, never go below Sonnet + Medium even in Cost mode. Flag the override in the reason.
+- **Security work overrides Cost/Speed goals.** See the Security Baseline in CCGM — applies to all steps regardless of goal or mode.
 
 ---
 
@@ -363,12 +363,19 @@ When using the TodoWrite tool or presenting a plan via ExitPlanMode:
 
 ## Trigger Phrases
 
-When the user says any of these (or close variants), engage architect mode and produce an annotated plan:
+Engage architect mode when **at least one** of these is true:
 
-- "plan this", "make a plan", "plan how to..."
-- "break this down", "break it into steps"
-- "roadmap for..."
-- "implement X", "build X feature", "add X to..."
-- "refactor X"
-- "todo list for...", "what are the steps..."
-- Multi-step engineering asks even without those keywords (e.g. "I want to migrate from X to Y")
+| Condition | Example |
+|-----------|---------|
+| User uses explicit planning language | "plan this", "make a plan", "roadmap for", "break this down", "break it into steps" |
+| Task has 3+ recognizably dependent steps | "migrate the DB, update the API, then fix the frontend" |
+| User asks for a todo list for a multi-step feature | "what are the steps to implement auth?", "todo list for adding payments" |
+
+**Do not trigger on:**
+- "implement X" or "build X" alone without multi-step context
+- "fix this", "add this" for a single-file or single-concept change
+- "refactor X" for a single targeted change
+- Conversational questions ("what's the best way to...")
+- Anything already covered by "When NOT to Annotate" above
+
+**The test:** Would a senior engineer naturally reach for a checklist here? If yes, trigger. If the work fits in one focused session without sub-decisions, don't.
