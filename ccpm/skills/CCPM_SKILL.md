@@ -9,9 +9,8 @@ description: >
   Quality / Speed / Learning / Balanced), CCPM adapts its model and effort choices to match
   that goal. Use this skill ANY TIME you create a plan, todo list, implementation roadmap,
   or break a feature down into steps — whether the user explicitly asks for a plan or you're
-  using ExitPlanMode/TodoWrite. Trigger on mentions of "plan", "roadmap", "steps", "break
-  this down", "implement X", "build X feature", "refactor", "todo list", or any multi-step
-  engineering task — even when the user doesn't explicitly say "plan".
+  using ExitPlanMode/TodoWrite. Trigger when the user uses explicit planning language, explicitly enumerates 3+ ordered steps,
+  or directly requests a todo/step-by-step breakdown — not on "implement X" or "build X" alone.
 ---
 
 # CCPM — Claude Code Plan Management
@@ -367,15 +366,17 @@ Engage architect mode when **at least one** of these is true:
 
 | Condition | Example |
 |-----------|---------|
-| User uses explicit planning language | "plan this", "make a plan", "roadmap for", "break this down", "break it into steps" |
-| Task has 3+ recognizably dependent steps | "migrate the DB, update the API, then fix the frontend" |
-| User asks for a todo list for a multi-step feature | "what are the steps to implement auth?", "todo list for adding payments" |
+| User uses explicit planning language | "plan this", "make a plan", "roadmap for", "break this down", "walk me through", "outline the steps", "what's the approach for" |
+| User's single message explicitly enumerates 3 or more ordered steps | "migrate the DB, update the API, then fix the frontend" |
+| User directly requests a todo list or step-by-step breakdown for a feature | "give me a todo list for adding payments", "what are the steps to implement auth?" |
 
 **Do not trigger on:**
-- "implement X" or "build X" alone without multi-step context
-- "fix this", "add this" for a single-file or single-concept change
+- "implement X", "build X", "add X to..." alone without multi-step context
+- "fix this", "change this" for a single-file or single-concept change
 - "refactor X" for a single targeted change
-- Conversational questions ("what's the best way to...")
+- Conversational questions about approach ("what's the best way to...", "how would you tackle...")
 - Anything already covered by "When NOT to Annotate" above
 
-**The test:** Would a senior engineer naturally reach for a checklist here? If yes, trigger. If the work fits in one focused session without sub-decisions, don't.
+Note on Condition 3: "what are the steps to implement X?" triggers if it reads as a request for a todo list. "what's the best approach for X?" does not — it's asking for advice, not a breakdown.
+
+**Sanity check after applying the conditions above:** Would a senior engineer naturally reach for a checklist here? If the conditions match but the task clearly fits in one focused session without sub-decisions, skip the plan.
