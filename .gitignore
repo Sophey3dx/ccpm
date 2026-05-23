@@ -1,0 +1,22 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Claude Code agent worktrees and local settings
+.claude/worktrees/
+.claude/settings.local.json
+
+# Node (for future npm/npx installer)
+node_modules/
+dist/
+*.tgz
