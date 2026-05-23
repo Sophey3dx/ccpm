@@ -103,7 +103,7 @@ Not a goal — an operating mode. When active, CCGM detects implicit signals and
 
 **Constraints:**
 - Only switches on clear, unambiguous signals. Vague tone does not trigger a switch.
-- Never auto-downgrades from a safer goal without an explicit signal (e.g., Quality → Speed requires a clear "ship it" signal).
+- Never auto-downgrades from a safer goal unless the signal matches the signal table exactly — paraphrases or soft tone alone do not qualify (e.g., Quality → Speed requires a clear signal from the table such as "ship it" or "just get it working").
 - Security baseline always applies regardless of auto mode. See Security Baseline.
 - Can be combined with any goal: `/goal auto` activates the operating mode; the current goal stays until a signal triggers a switch.
 
@@ -148,12 +148,14 @@ If no signal and no explicit set, **stay in ⚖️ Balanced**. Don't ask the use
 
 When `/goal auto` is active, implicit signals trigger an immediate switch instead of a confirmation prompt. Announce the switch in one line and proceed:
 
-> `⚡ Speed mode erkannt ("hack it together") — aktiviert. /goal balanced zum Zurückschalten.`
+> `⚡ Speed mode detected ("hack it together") — activated. /goal balanced to switch back.`
 
 The announcement format:
 ```
-🤖 [Goal emoji] [Goal name] erkannt ("[signal phrase]") — aktiviert. /goal [previous] zum Zurückschalten.
+🤖 [Goal emoji] [Goal name] detected ("[signal phrase]") — activated. /goal [previous] to switch back.
 ```
+
+Previous goal is the goal active immediately before the auto-switch; if no explicit goal was ever set, treat previous as `balanced`.
 
 Only switch on **clear signals** from the signal table above. If the signal is ambiguous, stay on the current goal — auto mode does not lower the bar for what counts as a signal, it only removes the confirmation step.
 
@@ -249,11 +251,14 @@ This is the single source of truth for the security rule. CCPM references this s
 ## Quick Reference
 
 ```
+# Goals
 /goal balanced    → ⚖️  Default. Sensible middle.
 /goal cost        → 💰  Cheapest viable. Haiku-heavy.
 /goal quality     → 🛡️  Best possible. Opus-heavy, more thinking.
 /goal speed       → ⚡  Ship fast. Polish deferred.
 /goal learning    → 🎓  Teach mode. Walk through reasoning.
+
+# Operating mode (not a goal)
 /goal auto        → 🤖  Auto mode. Signals switch goal without confirmation.
 /goal off         → revert to Balanced (also exits auto mode)
 ```
