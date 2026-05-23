@@ -43,7 +43,7 @@ Minimize token spend. Use the cheapest viable model for each step. Accept slight
 - Read fewer files unless really needed
 - Prefer targeted edits over full-file rewrites
 
-**Override rule:** Security-sensitive work (auth, secrets, user data) never drops below Sonnet + Medium. Flag overrides in output.
+**Override rule:** Security-sensitive work always follows the Security Baseline — see below.
 
 **Say to user when entering:** "💰 Cost mode active. I'll lean on Haiku/Sonnet, keep thinking budgets lean, and flag if I need to escalate."
 
