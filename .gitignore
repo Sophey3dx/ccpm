@@ -11,6 +11,8 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Superpowers planning docs (local only)
 docs/
 
 # Claude Code agent worktrees and local settings
