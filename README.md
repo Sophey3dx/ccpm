@@ -182,11 +182,13 @@ If only CCGM is installed: goals affect everything *except* per-step plan routin
 | 🎓 **Learning** | Walk through reasoning, one piece at a time, check understanding. |
 
 ```
-/goal cost       → 💰
-/goal quality    → 🛡️
-/goal speed      → ⚡
-/goal learning   → 🎓
-/goal balanced   → ⚖️ (or /goal off)
+/goal balanced   → ⚖️  Default. Sensible middle.
+/goal cost       → 💰  Cheapest viable. Haiku-heavy.
+/goal quality    → 🛡️  Best possible. Opus-heavy, more thinking.
+/goal speed      → ⚡  Ship fast. Polish deferred.
+/goal learning   → 🎓  Teach mode. Walk through reasoning.
+/goal auto       → 🤖  Auto mode. Detects signals, switches without asking.
+/goal off        → revert to Balanced (also exits auto mode)
 ```
 
 CCGM also **actively suggests switches** when context shifts — e.g. a "quick fix" balloons into a deep investigation, or a learning session pivots to a prod deploy.
