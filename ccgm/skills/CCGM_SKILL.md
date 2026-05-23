@@ -198,9 +198,21 @@ If CCPM isn't loaded but the user asks for a plan, you can still apply goal-awar
 ## What CCGM Does NOT Override
 
 - **Safety:** Destructive operations always get full clarity, regardless of mode. Speed mode doesn't get to skip "are you sure you want to delete prod?" warnings.
-- **Security:** Auth, secrets, and user-data handling never drop below Sonnet + Medium. Even in Cost mode.
+- **Security:** See Security Baseline below — never overridden by any goal or mode.
 - **Correctness:** Never sacrifice technical accuracy. All modes care about being right; they differ on how much *extra* effort goes into being thorough beyond "right."
 - **User explicit request:** If the user asks for detail/care/explanation/etc., honor it even if the current mode would normally do less.
+
+---
+
+## Security Baseline
+
+**Auth, secrets, and user-data-sensitive steps never drop below Sonnet 4.6 + Medium effort — regardless of active goal, auto mode, or any other setting.**
+
+This rule cannot be overridden. It applies even in 💰 Cost mode, ⚡ Speed mode, and 🤖 Auto mode. When a step triggers this baseline, flag it in the step output:
+
+> `⚠️ Security baseline: bumped to Sonnet + Medium (touches auth/secrets).`
+
+This is the single source of truth for the security rule. CCPM references this section rather than defining its own version.
 
 ---
 
