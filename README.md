@@ -13,7 +13,7 @@
 
 ## TL;DR — In 30 Seconds
 
-1. Copy `skills/ccpm` and `skills/ccgm` to `~/.claude/skills/`
+1. Run: `npx skills add Sophey3dx/ccpm --skill ccpm --skill ccgm -g`
 2. Start a new Claude Code session
 3. Say: *"Plan how to add dark mode to my app"*
    → You'll see `🤖 … | ⚡ …` tags under each step, routing each one to the right model
@@ -93,37 +93,19 @@ With CCGM in **🛡️ Quality mode**, it shifts the other way — more Opus, mo
 
 ### Both skills (recommended)
 
-**macOS / Linux:**
 ```bash
-mkdir -p ~/.claude/skills
-git clone https://github.com/Sophey3dx/ccpm.git /tmp/ccpm
-cp -r /tmp/ccpm/skills/ccpm ~/.claude/skills/
-cp -r /tmp/ccpm/skills/ccgm ~/.claude/skills/
-rm -rf /tmp/ccpm
-```
-
-**Windows (PowerShell):**
-```powershell
-$skillsDir = "$env:USERPROFILE\.claude\skills"
-New-Item -ItemType Directory -Force -Path $skillsDir | Out-Null
-git clone https://github.com/Sophey3dx/ccpm.git $env:TEMP\ccpm
-Copy-Item -Recurse $env:TEMP\ccpm\skills\ccpm $skillsDir
-Copy-Item -Recurse $env:TEMP\ccpm\skills\ccgm $skillsDir
-Remove-Item -Recurse -Force $env:TEMP\ccpm
-```
-
-After install, the layout should be:
-```
-~/.claude/skills/
-├── ccpm/
-│   └── SKILL.md
-└── ccgm/
-    └── SKILL.md
+npx skills add Sophey3dx/ccpm --skill ccpm --skill ccgm -g
 ```
 
 ### Just one skill
 
-If you only want one, copy only that folder. They work independently.
+```bash
+# Plan management only
+npx skills add Sophey3dx/ccpm --skill ccpm -g
+
+# Goal management only
+npx skills add Sophey3dx/ccpm --skill ccgm -g
+```
 
 ### Verify
 

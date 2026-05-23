@@ -15,6 +15,9 @@ Thumbs.db
 # Superpowers planning docs (local only)
 docs/
 
+# Firecrawl temp files
+.firecrawl/
+
 # Claude Code agent worktrees and local settings
 .claude/worktrees/
 .claude/settings.local.json
